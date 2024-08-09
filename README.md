@@ -7,6 +7,9 @@ $$m(x + p) = J(x) + g^T p + 1/2 p^T H p$$
 In Zhang et al. 2023, the gradient can be computed as (Equation 8 and Equation 9):
 
 $$g \approx D_\mu L = 1/N \sum_{i=1}^N J(X^i) (X^i - \mu)$$
+
+and 
+
 $$H \approx D_\Sigma L = 1/N \sum_{i=1}^N J(X^i) ( (X^i - \mu)(X^i - \mu) - \Sigma )$$
 
 TR-ens algorihm:
@@ -23,7 +26,7 @@ Step 2: Calculate the gradients
 Calculate $D_\mu L$ and $D_\Sigma L$
 
 Step 3: Step calculation.
-Let $g_k = D_\mu L$ and $H_k = \D_Sigma L$ 
+Let $g_k = D_\mu L$ and $H_k = \D_\Sigma L$ 
 Solve $p_k$
 
 Step 4: Acceptance of the trial point.
