@@ -16,7 +16,7 @@ TR-ens algorihm:
 
 Step 0: Initialization
 Set $k = 0$. Set maximum number of iterations. Set covariance step size $\beta_0$
-Given an initial point x_0 and an initial trust-region radius $\Delta_0$
+Given an initial point $x_0$ and an initial trust-region radius $\Delta_0$
 Let $0 < \eta_1 \leq \eta_2 < 1$, $0 < \gamma_1 < 1$, and $\gamma_2 > 1$
 
 Step 1: Sampling.
@@ -26,7 +26,7 @@ Step 2: Calculate the gradients
 Calculate $D_\mu L$ and $D_\Sigma L$
 
 Step 3: Step calculation.
-Let $g_k = D_\mu L$ and $H_k = \D_\Sigma L$ 
+Let $g_k = D_\mu L$ and $H_k = D_\Sigma L$ 
 Solve $p_k$
 
 Step 4: Acceptance of the trial point.
@@ -44,5 +44,8 @@ Set
 
 $\Delta_{k+1} = 
 max[\gamma_2 \| p_k \|_k, \Delta_k] if \rho_k \geq \eta_2
-\Delta_k if \rho_k \in (\eta_1, \eta_2)
-\gamma_1 \| p_k \|_k if \rho_k \leq \eta_1$
+\Delta_k \text{if} \rho_k \in (\eta_1, \eta_2)$
+
+or 
+
+$\Delta_{k+1} = \gamma_1 \| p_k \|_k \text{if} \rho_k \leq \eta_1$
