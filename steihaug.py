@@ -59,5 +59,5 @@ def steihaug(g:np.ndarray, B:np.ndarray, R:float):
         p = z_*1
     
     
-    print(f"FAILED")
-    return z + a*d
+    raise ValueError(f"Steihaug step FAILED")
+    # return z + a*d

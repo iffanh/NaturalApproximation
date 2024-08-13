@@ -97,6 +97,7 @@ for k in range(Niter):
     # step 2: calculate gradient
     # evaluate
     Jk = f(Uk.T)
+    # gk = approximation.natural_gradient2(J=Jk, j=jk, U=Uk, u=uk, S=Sk)
     gk = approximation.natural_gradient(J=Jk, j=jk, U=Uk, u=uk)
     Hk = approximation.natural_Hessian(J=Jk, j=jk, U=Uk, u=uk, S=Sk)
     Ck = approximation.natural_covariance(U=Uk, u=uk, S=Sk)
@@ -128,12 +129,21 @@ for k in range(Niter):
             uk = np.array(uk1)#[:,0]
             
             jk = jk1*1
+            # Sk = Sk + bk*Hk
+            bk = b0
             
         else:
             uk = uk*1
+            # bk = bk/2
         
     # step 5: update the covariance matrix
+    
+    if 10*bk*np.linalg.norm(Hk) > np.linalg.norm(Sk):
+        print("Here")
+        Hk = Hk*np.linalg.norm(Sk)/np.linalg.norm(Hk) 
+        
     Sk = Sk + bk*Hk
+    
     ## TODO: any heuristics to adjust bk so that Sk does not explode?
     
     # trust-region radius update
@@ -142,8 +152,8 @@ for k in range(Niter):
         
     else:
         if rho >= e2: 
-            # rk = np.max([g2*np.linalg.norm(uk - uk_), rk])
-            rk = rk*g2
+            rk = np.max([g2*np.linalg.norm(uk - uk_), rk])
+            # rk = rk*g2
         elif rho <= e1:
             rk = g1*np.linalg.norm(uk1 - uk)
             # rk = g1*rk
